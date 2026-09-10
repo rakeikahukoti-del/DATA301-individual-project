@@ -1,4 +1,4 @@
-# DATA301 Group Project
+# DATA301 Individual Project
 
 ## Dataset
 
