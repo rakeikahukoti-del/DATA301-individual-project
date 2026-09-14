@@ -4,7 +4,9 @@ Individual Phase 2 analysis for DATA301: Data Science in Practice
 
 ## Reseach Question
 
-What is the relationship between a game's genre and its proportion of positive reviews, after accounting for price and age rating?
+What is the relationship between a game's genre and its proportion of positive reviews,
+
+after accounting for price and age rating?
 
 ## Dataset
 
