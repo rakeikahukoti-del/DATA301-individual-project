@@ -1,0 +1,154 @@
+---
+title: "DATA301 Individual Report"
+subtitle: "Genre and Positive Review Share on Steam, After Accounting for Price and Age Rating"
+author:
+  - name: "Rakei Kahukoti: 300626332"
+date: "2026-10-25"
+date-format: "[Due:] DD MMMM YYYY"
+format:
+  pdf:
+    fontsize: 11pt
+    colorlinks: true
+editor: visual
+header-includes: |
+  \setlength{\parskip}{10pt}
+  \AtBeginDocument{\captionsetup{labelfont=bf, format=plain, justification=centering}}
+---
+
+## Content Overview
+
+\hypersetup{linkcolor=black}
+
+
+| **Section** | **Page** |
+|:---|:--:|
+| \hyperref[sec-exec]{\textbf{Executive Summary}} | \pageref{sec-exec} |
+| \hyperref[sec-background]{1. \textbf{Background}} | \pageref{sec-background} |
+| \hyperref[sec-data]{2. \textbf{Data Description}} | \pageref{sec-data} |
+| \hyperref[sec-data-structure]{\quad a. Data Types and Structure} | \pageref{sec-data-structure} |
+| \hyperref[sec-data-vars]{\quad b. Variables Used in the Analysis} | \pageref{sec-data-vars} |
+| \hyperref[sec-data-quality]{\quad c. Data Cleaning and Completeness} | \pageref{sec-data-quality} |
+| \hyperref[sec-ethics]{3. \textbf{Ethics, Privacy and Security}} | \pageref{sec-ethics} |
+| \hyperref[sec-eda]{4. \textbf{Exploratory Data Analysis}} | \pageref{sec-eda} |
+| \hyperref[sec-eda-scope]{\quad a. Scoping Data} | \pageref{sec-eda-scope} |
+| \hyperref[sec-eda-genre]{\quad b. Genre Distribution} | \pageref{sec-eda-genre} |
+| \hyperref[sec-eda-pos]{\quad c. Positive Reviews Distribution} | \pageref{sec-eda-pos} |
+| \hyperref[sec-eda-conf]{\quad d. Confounders (Price and Age by Genre)} | \pageref{sec-eda-conf} |
+| \hyperref[sec-analysis]{5. \textbf{Detailed Analysis}} | \pageref{sec-analysis} |
+| \hyperref[sec-method]{\quad a. Method} | \pageref{sec-method} |
+| \hyperref[sec-test]{\quad b. Hypothesis test} | \pageref{sec-test} |
+| \hyperref[sec-effects]{\quad c. Size of Each Effect} | \pageref{sec-effects} |
+| \hyperref[sec-fit]{\quad d. Model Fit and Prediction} | \pageref{sec-fit} |
+| \hyperref[sec-bias]{\quad e. Possible Biases} | \pageref{sec-bias} |
+| \hyperref[sec-conclusions]{6. \textbf{Conclusions and Recommendations}} | \pageref{sec-conclusions} |
+| \hyperref[sec-references]{7. \textbf{References}} | \pageref{sec-references} |
+| \hyperref[sec-appendix-b]{9. \textbf{Appendix B (Github Repository)}} | \pageref{sec-appendix-b} |
+
+
+\hypersetup{linkcolor=blue}
+
+\newpage
+
+## Executive Summary {#sec-exec}
+
+
+
+\newpage
+
+## 1. Background {#sec-background}
+
+
+**Aim.** This report answers one question. What is the relationship between a game's genre and its proportion of positive reviews, after accounting for price and age rating?
+
+
+
+\newpage
+
+## 2. Data Description {#sec-data}
+
+### **2a. Data Types and Structure** {#sec-data-structure}
+
+### **2b. Variables Used in the Analysis** {#sec-data-vars}
+
+### **2c. Data Cleaning and Completeness** {#sec-data-quality}
+
+
+
+\newpage
+
+## 3. Ethics, Privacy and Security {#sec-ethics}
+
+
+
+
+\newpage
+
+## 4. Exploratory Data Analysis {#sec-eda}
+
+#### **4a. Scoping Data** {#sec-eda-scope}
+
+![Distribution of total review counts, clipped at 200 reviews for readability](images/figure2.svg){#fig-reviews fig-align="center" width="50%"}
+
+#### **4b. Genre Distribution** {#sec-eda-genre}
+
+![Number of games per genre, 10 genres with at least 100 games](images/figure3.svg){#fig-genres fig-align="center" width="50%"}
+
+#### **4c. Positive Reviews Distribution** {#sec-eda-pos}
+
+![Percentage of positive reviews by genre, 10 genres with at least 100 games. Notches show approximate 95% confidence intervals for the median](images/figure4.svg){#fig-pospct fig-align="center" width="50%"}
+
+#### **4d. Confounders (Price and Age by Genre)** {#sec-eda-conf}
+
+![Base price (USD) by genre, games priced under \$60. Notches show approximate 95% confidence intervals for the median](images/figure5.svg){#fig-price fig-align="center" width="50%"}
+
+![Share of games with an age restriction, by genre](images/figure6.svg){#fig-age fig-align="center" width="50%"}
+
+
+
+\newpage
+
+## 5. Detailed Analysis {#sec-analysis}
+
+#### **5a. Method** {#sec-method}
+
+#### **5b. Hypothesis test** {#sec-test}
+
+#### **5c. Size of Each Effect** {#sec-effects}
+
+#### **5d. Model Fit and Prediction** {#sec-fit}
+
+#### **5e. Possible Biases** {#sec-bias}
+
+
+
+\newpage
+
+## 6. Conclusions and Recommendations {#sec-conclusions}
+
+
+
+\newpage
+
+## 7. References {#sec-references}
+
+Ermilov, A. (2025). Steam games dataset.
+
+-   Kaggle. <https://www.kaggle.com/datasets/artermiloff/steam-games-dataset>
+
+Kafadar, K. (2026). Boxplots: Definition, history, extensions, and examples.
+
+-   WIREs Computational Statistics, 18(3). <https://doi.org/10.1002/wics.70073>
+
+McGill, R., Tukey, J. W., & Larsen, W. A. (1978). Variations of box plots.
+
+-   The American Statistician, 32(1), 12–16. <https://doi.org/10.2307/2683468>
+
+Papke, L. E., & Wooldridge, J. M. (1996). Econometric methods for fractional response variables with an application to 401(k) plan participation rates.
+
+-   Journal of Applied Econometrics, 11(6), 619–632.
+
+\newpage
+
+## 9. Appendix B (Github Repository) {#sec-appendix-b}
+
+<https://github.com/rakeikahukoti-del/DATA301-individual-project.git>
