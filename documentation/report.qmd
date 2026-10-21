@@ -15,8 +15,6 @@ header-includes: |
   \AtBeginDocument{\captionsetup{labelfont=bf, format=plain, justification=centering}}
 ---
 
-Phase 1 group members: Joanna Calizo (300666927) and Derick Uriel (300663866)
-
 ## Content Overview
 
 \hypersetup{linkcolor=black}
@@ -52,13 +50,8 @@ Phase 1 group members: Joanna Calizo (300666927) and Derick Uriel (300663866)
 
 ## Executive Summary {#sec-exec}
 
-**Goal.** Some genres on Steam seem to get better reviews than others. But genres also differ in price and age rating, which could explain the gap instead. This report asks whether genre is still linked to the share of positive reviews once price and age rating are taken into account.
+**Goal.** Some genres on Steam seem to get better reviews than others. But genres also differ in price and age rating, which could explain the gap instead. This report asks whether genre is still linked to the share of positive reviews once price and age rating are taken into account. **Data.** We used the Steam Games Dataset from Kaggle (March 2025). It covers 89,618 games. Steam hides review scores for games with fewer than 10 reviews (41% of games). We kept games with at least 30 reviews so each score is stable. This left 34,414 games across 10 main genres. A game can have several genres. No values were missing in the variables we used. **Method.** We fitted a regression model that estimates how much each genre raises or lowers a game's share of positive reviews, with price and age rating held fixed. We tested it by fitting on 80% of games and predicting the other 20%. **Findings.** Genre is clearly linked to review share, even after allowing for price and age rating (p \< 0.001). The table shows the change in percentage points compared with similar games without that genre. The average game has 78.2% positive reviews.
 
-**Data.** We used the Steam Games Dataset from Kaggle (March 2025). It covers 89,618 games. Steam hides review scores for games with fewer than 10 reviews (41% of games). We kept games with at least 30 reviews so each score is stable. This left 34,414 games across 10 main genres. A game can have several genres. No values were missing in the variables we used.
-
-**Method.** We fitted a regression model that estimates how much each genre raises or lowers a game's share of positive reviews, with price and age rating held fixed. We tested it by fitting on 80% of games and predicting the other 20%.
-
-**Findings.** Genre is clearly linked to review share, even after allowing for price and age rating (p \< 0.001). The table shows the change in percentage points compared with similar games without that genre. The average game has 78.2% positive reviews.
 
 | Genre                 | Change | 95% confidence interval |
 |:----------------------|-------:|:-----------------------:|
@@ -73,23 +66,15 @@ Phase 1 group members: Joanna Calizo (300666927) and Derick Uriel (300663866)
 | Simulation            |   −4.6 |      −5.0 to −4.2       |
 | Massively Multiplayer |   −9.0 |      −9.9 to −8.1       |
 
-\addtocounter{table}{-1}
-
-Massively Multiplayer games stand out with about 9 points fewer positive reviews. For Adventure and Racing there is not enough evidence of a difference. Age-restricted games had 1.3 points fewer positive reviews (95% CI 0.3 to 2.4). Of the prices we checked, games at \$0.99 had the lowest predicted share at 75.4%. Above that, pricier games were reviewed more positively, rising to 82.1% at \$59.99.
-
-**Caution.** Genre explains only about 6% of the variation between games. On new games the model's typical error was about 12 points. Most of what makes a game well reviewed is not in this dataset. These results show links, not causes.
+Massively Multiplayer games stand out with about 9 points fewer positive reviews. For Adventure and Racing there is not enough evidence of a difference. Age-restricted games had 1.3 points fewer positive reviews (95% CI 0.3 to 2.4). Of the prices we checked, games at \$0.99 had the lowest predicted share at 75.4%. Above that, pricier games were reviewed more positively, rising to 82.1% at \$59.99. **Caution.** Genre explains only about 6% of the variation between games. On new games the model's typical error was about 12 points. Most of what makes a game well reviewed is not in this dataset. These results show links, not causes.
 
 \newpage
 
 ## 1. Background {#sec-background}
 
-Steam is the largest digital store for PC games. It is run by Valve and lists tens of thousands of games. Players who own a game can leave a review. Each review is a simple thumbs up (positive) or thumbs down (negative). Steam shows the share of positive reviews on every store page. Buyers use this score to decide what to buy. Developers use it to judge how a game was received.
+Steam is the largest digital store for PC games. It is run by Valve and lists tens of thousands of games. Players who own a game can leave a review. Each review is a simple thumbs up (positive) or thumbs down (negative). Steam shows the share of positive reviews on every store page. Buyers use this score to decide what to buy. Developers use it to judge how a game was received. Each game on Steam has one or more genres, such as Action or Strategy. Developers choose these when they list a game. Genres are different from tags, which players can add freely. Massively Multiplayer games are online games where many players share one world. Indie games are made by small independent studios. Free to play games cost nothing to download and earn money through in-game purchases. Early Access games are still being built but can already be bought. An age rating is the minimum age Steam asks players to confirm before viewing a game. In the Phase 1 group report we found that the median share of positive reviews differs by genre. Casual games had the highest median at 83%. Massively Multiplayer games had the lowest at 67%. We also found that price and age rating vary by genre ([Section 4d](#sec-eda-conf)). This means the genre gap could partly be a price or age effect. A fair comparison needs to account for both. **Aim.** This report answers one question. What is the relationship between a game's genre and its proportion of positive reviews, after accounting for price and age rating? 
 
-Each game on Steam has one or more **genres**, such as Action or Strategy. Developers choose these when they list a game. Genres are different from **tags**, which players can add freely. **Massively Multiplayer** games are online games where many players share one world. **Indie** games are made by small independent studios. **Free to play** games cost nothing to download and earn money through in-game purchases. **Early Access** games are still being built but can already be bought. An **age rating** is the minimum age Steam asks players to confirm before viewing a game.
-
-In the Phase 1 group report we found that the median share of positive reviews differs by genre. Casual games had the highest median at 83%. Massively Multiplayer games had the lowest at 67%. We also found that price and age rating vary by genre ([Section 4d](#sec-eda-conf)). This means the genre gap could partly be a price or age effect. A fair comparison needs to account for both.
-
-**Aim.** This report answers one question. What is the relationship between a game's genre and its proportion of positive reviews, after accounting for price and age rating? To answer it we:
+To answer it we:
 
 1.  test whether genre adds explanatory power beyond price and age rating,
 2.  estimate the size of each genre's effect with confidence intervals, and
@@ -99,13 +84,11 @@ In the Phase 1 group report we found that the median share of positive reviews d
 
 ### **2a. Data Types and Structure** {#sec-data-structure}
 
-We used the cleaned March 2025 version of the Steam Games Dataset (Ermilov, 2025). It was collected from the Steam store and the Steam API. It has 89,618 rows and 47 variables. Each row is one game, and games run from 1997 to March 2025. The data is a single snapshot, not a time series.
+We used the cleaned March 2025 version of the Steam Games Dataset (Ermilov, 2025). It was collected from the Steam store and the Steam API. It has 89,618 rows and 47 variables. Each row is one game, and games run from 1997 to March 2025. The data is a single snapshot, not a time series. The variables are a mix of numeric (price, review counts, playtime), categorical (developer, publisher, platforms), list (genres, tags) and text (descriptions) types. List variables can hold several values for one game.
 
-The variables are a mix of numeric (price, review counts, playtime), categorical (developer, publisher, platforms), list (genres, tags) and text (descriptions) types. List variables can hold several values for one game.
+\newpage
 
 ### **2b. Variables Used in the Analysis** {#sec-data-vars}
-
-@tbl-vars lists the variables used in the detailed analysis.
 
 | **Variable** | **Type** | **Meaning** |
 |:---|:---|:---|
@@ -115,74 +98,48 @@ The variables are a mix of numeric (price, review counts, playtime), categorical
 | `price` | Numeric (USD) | Base price at time of scraping. 0 means free. |
 | `required_age` | Numeric | Minimum age rating set on Steam. 0 means no restriction. |
 
-: Variables used in the detailed analysis {#tbl-vars}
 
-The `genres` list contains 27 labels. Six of them describe content or business model rather than genre: Violent, Gore, Nudity, Sexual Content, Free To Play and Early Access. We removed these. Of the rest, 10 genres have at least 100 games: Action, Adventure, Casual, Indie, Massively Multiplayer, Racing, RPG, Simulation, Sports and Strategy. The others are software labels such as Utilities, with fewer than 10 games each. On average a game has 2.7 of the 10 genres.
+The genres list contains 27 labels. Six of them describe content or business model rather than genre: Violent, Gore, Nudity, Sexual Content, Free To Play and Early Access. We removed these. Of the rest, 10 genres have at least 100 games: Action, Adventure, Casual, Indie, Massively Multiplayer, Racing, RPG, Simulation, Sports and Strategy. The others are software labels such as Utilities, with fewer than 10 games each.
 
 ### **2c. Data Cleaning and Completeness** {#sec-data-quality}
 
-The dataset has no duplicate games. We dropped columns that hold links, images, videos or long text, since they do not help answer our question. We also dropped `score_rank`, which is missing for 89,579 games (over 99%).
-
-The main data quality issue is in the review variables. Steam sets `num_reviews_total` and `pct_pos_total` to −1 when a game has fewer than 10 reviews. This affects 36,419 games (41%). These are not missing at random. They are small and less popular games. We also kept only games with at least 30 reviews. At 10 reviews a single review moves the score by 10 points, but at 30 reviews it moves it by about 3 points. This kept 34,583 games (38.6%). Our results therefore describe established games, not the whole store.
-
-After removing the six non-genre labels, 167 games had no genre left and two only had software labels. We removed these 169 games, leaving 34,414 for analysis. Price and age rating have no missing values in this sample. The `positive` and `negative` columns do not add up to `num_reviews_total` for 93% of games, as they appear to come from different parts of the Steam API. We therefore used `pct_pos_total` as the response.
-
-We also found that Steam stores each game's genres in alphabetical order (99.7% of games). This means the first genre listed is not a "main" genre. For example, Strategy is listed on 7,269 games but comes first for only 550. We kept every genre a game has instead of choosing one.
-
-All cleaning steps are scripted in our notebook ([Appendix B](#sec-appendix-b)). No data was edited by hand.
+Dataset has no duplicate games. We dropped columns that hold links, images, videos or long text, since they do not help answer our question. We also dropped score_rank, which is missing for 89,579 games (over 99%). Main data quality issue is in review variables. Steam sets num_reviews_total and pct_pos_total to −1 when a game has fewer than 10 reviews. This affects 36,419 games (41%). We also kept only games with at least 30 reviews. At 10 reviews a single review moves the score by 10 points, but at 30 reviews it moves it by about 3 points. This kept 34,583 games (38.6%). Our results therefore describe established games. After removing the six non-genre labels, 167 games had no genre left and two only had software labels. We removed these 169 games, leaving 34,414 for analysis. Price and age rating have no missing values in this sample. The positive and negative columns do not add up to num_reviews_total for 93% of games, as they appear to come from different parts of the Steam API. We therefore used pct_pos_total as the response. We also found that Steam stores each game's genres in alphabetical order (99.7% of games). This means the first genre listed is not a "main" genre. We kept every genre a game has instead of choosing one.
 
 ## 3. Ethics, Privacy and Security {#sec-ethics}
 
-**Data and privacy.** The data was scraped from the public Steam store and the Steam API. The variables we used hold no reviewer names, account IDs or review text, so no personal data was used. Review text can contain personal details, but we did not use it. Game titles and descriptions are copyrighted, so we used them only for analysis and do not republish them.
+**Data and privacy.** The data was scraped from the public Steam store and the Steam API. The variables we used hold no reviewer names, account IDs or review text, so no personal data was used. Review text can contain personal details, but we did not use it. Game titles and descriptions are copyrighted, so we used them only for analysis and do not republish them. **Bias in reviews.** Review share reflects the players who chose to leave a review, not all players. People with strong opinions are more likely to review. Some games are also hit by "review bombing", where many negative reviews are posted in a short time over an issue outside the game itself. Online games with ongoing updates and in-game purchases may be more exposed to this. This could lower Massively Multiplayer scores for reasons that are not about game quality. Our 30-review filter also removes most small games, so results may not apply to new or niche titles. **Fair use of results.** Ranking genres as "better" or "worse" could unfairly steer buyers and developers away from some genres. Our model shows associations, not causes, and genre explains only a small part of review share. We state these limits wherever results are reported. **Security.** Below we separate the steps we took from the steps we would take with more time and resources.
 
-**Bias in reviews.** Review share reflects the players who chose to leave a review, not all players. People with strong opinions are more likely to review. Some games are also hit by "review bombing", where many negative reviews are posted in a short time over an issue outside the game itself. Online games with ongoing updates and in-game purchases may be more exposed to this. This could lower Massively Multiplayer scores for reasons that are not about game quality. Our 30-review filter also removes most small games, so results may not apply to new or niche titles.
-
-**Fair use of results.** Ranking genres as "better" or "worse" could unfairly steer buyers and developers away from some genres. Our model shows associations, not causes, and genre explains only a small part of review share. We state these limits wherever results are reported.
-
-**Security.** Below we separate the steps we took from the steps we would take with more time and resources.
-
-- *Steps taken:* code is stored in a private GitHub repository. The raw data file is excluded from version control through `.gitignore`. Project files were shared only with group members and the supervisor. This report was written in Quarto and rendered with LuaLaTeX. (The Phase 1 report wrongly said it was written in Google Docs.)
-- *Steps we would take:* turn on two-factor login for all accounts with access, store the data on an encrypted drive, keep an access log, and delete local copies of the data when the project ends.
+*Steps taken:* code is stored in a public GitHub repository so it can be checked. The raw data file is kept out of the repository through .gitignore. Group files from Phase 1 were shared only with group members and the supervisor. This report was drafted in Google Doxs but was then written in Quarto and rendered with LuaLaTeX. *Steps we would take:* turn on two-factor login for all accounts with access, store the data on an encrypted drive, keep an access log, and delete local copies of the data when the project ends.
 
 ## 4. Exploratory Data Analysis {#sec-eda}
 
-This section revises the Phase 1 exploratory analysis. We kept only the plots that relate to our question. All plots use the 34,414 games described in [Section 2c](#sec-data-quality), except @fig-reviews.
+This section revises the Phase 1 exploratory analysis. We kept only the plots that relate to our question. All plots use the 34,414 games described in [Section 2c](#sec-data-quality), except [Figure 1](#fig-reviews).
 
 #### **4a. Scoping Data** {#sec-eda-scope}
 
-@fig-reviews shows how many reviews each game has. Most games sit at the low end. The dashed line marks our 30-review cutoff. Below this line a few reviews can swing a game's score a lot.
+[Figure 1](#fig-reviews) shows how many reviews each game has. Most games sit at the low end. The dashed line marks our 30-review cutoff. Below this line a few reviews can swing a game's score a lot.
+
+![Total review counts for games with at least 10 reviews. Games with 200 or more reviews are grouped in the last bar](images/phase2/fig-reviews.svg){#fig-reviews fig-align="center" width="50%" fig-pos="H"}
 
 #### **4b. Genre Distribution** {#sec-eda-genre}
 
-@fig-genres shows how many games carry each of the 10 genres, with exact counts on each bar. Indie is by far the most common with 24,155 games, followed by Adventure (14,844) and Action (13,953). The smallest genre is Racing with 1,143 games. A game with several genres is counted once in each, so the bars add up to more than 34,414.
+[Figure 2](#fig-genres) shows how many games carry each of the 10 genres, with exact counts on each bar. Indie is by far the most common with 24,155 games, followed by Adventure (14,844) and Action (13,953). The smallest genre is Racing with 1,143 games. A game with several genres is counted once in each, so the bars add up to more than 34,414.
 
-::: {layout-ncol="2"}
-![Total review counts for games with at least 10 reviews. Games with 200 or more reviews are grouped in the last bar](images/fig-reviews.pdf){#fig-reviews}
-
-![Number of games with each genre, for games with at least 30 reviews](images/fig-genres.pdf){#fig-genres}
-:::
+![Number of games with each genre, for games with at least 30 reviews](images/phase2/fig-genres.svg){#fig-genres fig-align="center" width="50%" fig-pos="H"}
 
 #### **4c. Positive Reviews Distribution** {#sec-eda-pos}
 
-@fig-pospct shows the share of positive reviews by genre. Genres are sorted by median. All boxes use one colour, which carries no meaning. The notches show approximate 95% confidence intervals for each median, calculated as the median ± 1.57 × IQR / $\sqrt{n}$ (McGill et al., 1978). These intervals are symmetric by construction. If two notches do not overlap, there is good evidence that the medians differ.
+[Figure 3](#fig-pospct) shows the share of positive reviews by genre. Genres are sorted by median. All boxes use one colour, which carries no meaning. The notches show approximate 95% confidence intervals for each median, calculated as the median ± 1.57 × IQR / $\sqrt{n}$ (McGill et al., 1978). These intervals are symmetric by construction. If two notches do not overlap, there is good evidence that the medians differ. Casual has the highest median at 83%. Adventure and Indie follow at 82% and their notches overlap. Action, RPG and Racing all sit at 80% and overlap each other. Racing also overlaps Strategy (79%). Strategy overlaps Sports, and Sports overlaps Simulation (both 78%). Massively Multiplayer has a median of 67% and overlaps no other genre. Every genre has a long tail of games with low scores.
 
-Casual has the highest median at 83%. Adventure and Indie follow at 82% and their notches overlap. Action, RPG and Racing all sit at 80% and overlap each other. Racing also overlaps Strategy (79%). Strategy overlaps Sports, and Sports overlaps Simulation (both 78%). Massively Multiplayer has a median of 67% and overlaps no other genre. Every genre has a long tail of games with low scores.
-
-![Percentage of positive reviews by genre. Notches show approximate 95% confidence intervals for the median](images/fig-pospct.pdf){#fig-pospct fig-align="center" width="60%"}
+![Percentage of positive reviews by genre. Notches show approximate 95% confidence intervals for the median](images/phase2/fig-pospct.svg){#fig-pospct fig-align="center" width="70%"}
 
 #### **4d. Confounders (Price and Age by Genre)** {#sec-eda-conf}
 
-`price` is the base price in US dollars. @fig-price shows price by genre for games under \$60. Sports and RPG have the highest median at \$7.99 and their notches overlap. Simulation and Strategy overlap at \$6.99. Adventure and Action overlap at \$5.99. Indie and Racing overlap at \$4.99. Casual is lower at \$3.49. Massively Multiplayer has a median of \$0, because 69% of these games are free to play.
+`price` is the base price in US dollars. [Figure 4](#fig-price shows) price by genre for games under \$60. Sports and RPG have the highest median at \$7.99 and their notches overlap. Simulation and Strategy overlap at \$6.99. Adventure and Action overlap at \$5.99. Indie and Racing overlap at \$4.99. Casual is lower at \$3.49. Massively Multiplayer has a median of \$0, because 69% of these games are free to play. Only 47 games (0.14%) cost \$60 or more, with a maximum of \$199.99. They were left out of the plot for readability but kept in the model. Their median positive share is 70%, compared with 82% for games under \$60. `required_age` is the minimum age rating. [Figure 5](#fig-age) shows the share of games in each genre with any age restriction. Action has the highest share at 3.9% and Casual the lowest at 0.5%.
 
-Only 47 games (0.14%) cost \$60 or more, with a maximum of \$199.99. They were left out of the plot for readability but kept in the model. Their median positive share is 70%, compared with 82% for games under \$60.
+![Base price in US dollars by genre, for games under \$60. Notches show approximate 95% confidence intervals for the median](images/phase2/fig-price.svg){#fig-price fig-align="center" width="55%" fig-pos="H"}
 
-`required_age` is the minimum age rating. @fig-age shows the share of games in each genre with any age restriction. Action has the highest share at 3.9% and Casual the lowest at 0.5%.
-
-::: {layout-ncol="2"}
-![Base price in US dollars by genre, for games under \$60. Notches show approximate 95% confidence intervals for the median](images/fig-price.pdf){#fig-price}
-
-![Share of games with an age restriction, by genre](images/fig-age.pdf){#fig-age}
-:::
+![Share of games with an age restriction, by genre](images/phase2/fig-age.svg){#fig-age fig-align="center" width="55%" fig-pos="H"}
 
 Casual has the lowest age restriction share and the highest review share. Action and RPG have high age restriction shares and lower review shares. Price and age rating clearly vary across genres. These plots cannot show whether genre still matters once both are held fixed. This is why we fit a model in the next section.
 
@@ -203,17 +160,13 @@ where $p_i$ is the share of positive reviews for game $i$. The terms are:
 - **age**: 1 if `required_age` is above 0, otherwise 0. Most age values had very few games, so a single indicator is more stable.
 - **genre**: one 0/1 indicator for each of the 10 genres. A game tagged Action and Indie has a 1 in both. Each game appears once, so observations are independent.
 
-There are no interaction terms. We used robust (HC1) standard errors, which give valid confidence intervals even if the spread of the response differs between games.
+There are no interaction terms. We used robust (HC1) standard errors, which give valid confidence intervals even if the spread of the response differs between games. **Why not one genre per game.** An earlier version used the first listed genre as a game's main genre. Because genre lists are alphabetical ([Section 2c](#sec-data-quality)), this gave Action to every Action game and rarely gave Strategy. The indicator approach avoids this and uses all genre information. **Missing data.** No model variable has missing values after filtering. The main exclusion is the review filter, which is not random ([Section 2c](#sec-data-quality)).
 
-**Why not one genre per game.** An earlier version used the first listed genre as a game's main genre. Because genre lists are alphabetical ([Section 2c](#sec-data-quality)), this gave Action to every Action game and rarely gave Strategy. The indicator approach avoids this and uses all genre information.
-
-**Missing data.** No model variable has missing values after filtering. The main exclusion is the review filter, which is not random ([Section 2c](#sec-data-quality)).
+\newpage
 
 #### **5b. Does Genre Matter After Price and Age?** {#sec-test}
 
-We compared a model with only price and age terms against the full model with genre added. The null hypothesis is that all 10 genre coefficients are zero. In other words, genre adds nothing once price and age are known. A Wald test rejects this hypothesis ($\chi^2$ = 2140.6, df = 10, p \< 0.001). There is strong evidence that genre is linked to review share after accounting for price and age rating.
-
-@tbl-compare shows the share of deviance explained, which plays the role of $R^2$ for a GLM. Price and age alone explain 0.5%. Adding genre raises this to 6.1%. Genre adds far more than price and age, but most of the variation between games remains unexplained.
+We compared a model with only price and age terms against the full model with genre added. The null hypothesis is that all 10 genre coefficients are zero. In other words, genre adds nothing once price and age are known. A Wald test rejects this hypothesis ($\chi^2$ = 2140.6, df = 10, p \< 0.001). There is strong evidence that genre is linked to review share after accounting for price and age rating. [Table 1](#tbl-compare) shows the share of deviance explained, which plays the role of $R^2$ for a GLM. Price and age alone explain 0.5%. Adding genre raises this to 6.1%. Genre adds far more than price and age, but most of the variation between games remains unexplained.
 
 | **Model** | **Terms** | **Deviance explained** |
 |:---|:---|---:|
@@ -224,7 +177,7 @@ We compared a model with only price and age terms against the full model with ge
 
 #### **5c. Size of Each Effect** {#sec-effects}
 
-Log-odds coefficients are hard to read, so we converted them into **average marginal effects** in percentage points. For each genre, we predicted every game's review share with that genre switched on and then switched off. The average difference is the effect. 95% confidence intervals were found with the delta method. The coefficients themselves are in @tbl-robust.
+Log-odds coefficients are hard to read, so we converted them into **average marginal effects** in percentage points. For each genre, we predicted every game's review share with that genre switched on and then switched off. The average difference is the effect. 95% confidence intervals were found with the delta method. The coefficients themselves are in [Table 5](#tbl-robust).
 
 | **Term**              | **Games** | **Effect (pp)** |   **95% CI**   | **p-value** |
 |:----------------------|----------:|----------------:|:--------------:|------------:|
@@ -242,13 +195,9 @@ Log-odds coefficients are hard to read, so we converted them into **average marg
 
 : Average marginal effects on the percentage of positive reviews, in percentage points (pp). Each effect compares games with and without that feature, holding all other terms fixed. The mean positive share in the sample is 78.2% {#tbl-effects}
 
-![Average marginal effect of each genre on the percentage of positive reviews, with 95% confidence intervals. Intervals crossing the dashed line are not statistically significant](images/genre_effects.pdf){#fig-effects fig-align="center" width="55%"}
+![Average marginal effect of each genre on the percentage of positive reviews, with 95% confidence intervals. Intervals crossing the dashed line are not statistically significant](images/phase2/genre_effects.svg){#fig-effects fig-align="center" width="75%"}
 
-@tbl-effects and @fig-effects show the results. Indie (+2.6) and Casual (+2.2) are linked to more positive reviews. Six genres are linked to fewer. Massively Multiplayer stands well apart at −9.0 points, almost twice the next largest effect. For Adventure (p = 0.051) and Racing (p = 0.154) there is insufficient evidence of an effect. This does not show that they have no effect. Age-restricted games have 1.3 fewer points (p = 0.013).
-
-The ordering is close to the medians in @fig-pospct. Casual and Indie stay near the top and Massively Multiplayer stays at the bottom. So the genre gaps seen in the EDA are not explained by price or age rating.
-
-@tbl-price shows how predicted review share changes with price, with all other terms kept as observed. The relationship is not a straight line. Of the prices shown, games at \$0.99 have the lowest predicted share. Free games sit 1.9 points above them (95% CI 1.3 to 2.4). Above \$0.99, review share rises steadily with price. One reason may be that more expensive games tend to come from larger studios with bigger budgets.
+[Table 2](#tbl-effects) and [Figure 6](#fig-effects) show the results. Indie (+2.6) and Casual (+2.2) are linked to more positive reviews. Six genres are linked to fewer. Massively Multiplayer stands well apart at −9.0 points, almost twice the next largest effect. For Adventure (p = 0.051) and Racing (p = 0.154) there is insufficient evidence of an effect. This does not show that they have no effect. Age-restricted games have 1.3 fewer points (p = 0.013). The ordering is close to the medians in [Figure 3](#fig-pospct). Casual and Indie stay near the top and Massively Multiplayer stays at the bottom. So the genre gaps seen in the EDA are not explained by price or age rating. [Table 3](#tbl-price) shows how predicted review share changes with price, with all other terms kept as observed. The relationship is not a straight line. Of the prices shown, games at \$0.99 have the lowest predicted share. Free games sit 1.9 points above them (95% CI 1.3 to 2.4). Above \$0.99, review share rises steadily with price. One reason may be that more expensive games tend to come from larger studios with bigger budgets.
 
 | **Price (USD)** | **Predicted % positive** |  **95% CI**  |
 |----------------:|-------------------------:|:------------:|
@@ -263,7 +212,7 @@ The ordering is close to the medians in @fig-pospct. Casual and Indie stay near 
 
 #### **5d. Model Fit and Prediction** {#sec-fit}
 
-To test prediction we randomly split the games 80/20. We fitted each model on 27,531 games and predicted the other 6,883. @tbl-perf shows the root mean squared error (RMSE) and mean absolute error (MAE) in percentage points. A model that predicts the average for every game is included as a baseline.
+To test prediction we randomly split the games 80/20. We fitted each model on 27,531 games and predicted the other 6,883. [Table 4](#tbl-perf) shows the root mean squared error (RMSE) and mean absolute error (MAE) in percentage points. A model that predicts the average for every game is included as a baseline.
 
 | **Model**            | **Test RMSE (pp)** | **Test MAE (pp)** |
 |:---------------------|-------------------:|------------------:|
@@ -273,11 +222,7 @@ To test prediction we randomly split the games 80/20. We fitted each model on 27
 
 : Prediction error on a held-out 20% test set (6,883 games). Models were fitted on the other 80% {#tbl-perf}
 
-Price and age barely improve on the baseline. Adding genre lowers the error by about half a point, but the typical error is still about 12 points. The model describes differences between groups of games well, but it cannot predict an individual game's score with much accuracy.
-
-@fig-resid in [Appendix A](#sec-appendix-a) shows the model residuals. For 98% of games the fitted values sit in a narrow band from 64% to 84%, while real scores range from 0% to 100%. This matches the low deviance explained. The residuals are skewed to the left, because some games score far below what their genre and price suggest. There is no strong curve in the residuals. Variance inflation factors were all below 3, so the predictors are not highly correlated with each other.
-
-**Robustness.** We refitted the model with ordinary least squares on an empirical logit, $\log\left((k + 0.5)/(n - k + 0.5)\right)$, where $k$ is the number of positive reviews and $n$ the total. Every term kept the same sign and a similar size (@tbl-robust). The conclusions do not depend on the choice of model.
+Price and age barely improve on the baseline. Adding genre lowers the error by about half a point, but the typical error is still about 12 points. The model describes differences between groups of games well, but it cannot predict an individual game's score with much accuracy. [Figure 7](#fig-resid) in [Appendix A](#sec-appendix-a) shows the model residuals. For 98% of games the fitted values sit in a narrow band from 64% to 84%, while real scores range from 0% to 100%. This matches the low deviance explained. The residuals are skewed to the left, because some games score far below what their genre and price suggest. There is no strong curve in the residuals. Variance inflation factors were all below 3, so the predictors are not highly correlated with each other. **Robustness.** We refitted the model with ordinary least squares on an empirical logit, $\log\left((k + 0.5)/(n - k + 0.5)\right)$, where $k$ is the number of positive reviews and $n$ the total. Every term kept the same sign and a similar size ([Table 5](#tbl-robust)). The conclusions do not depend on the choice of model.
 
 #### **5e. Possible Biases** {#sec-bias}
 
@@ -296,9 +241,7 @@ Price and age barely improve on the baseline. Adding genre lowers the error by a
 - **Developers** of Massively Multiplayer and Simulation games should expect lower baseline scores. They should judge their reception against genre peers, not the whole store.
 - **Steam** could show genre averages next to review scores to give buyers this context.
 
-**Limitations.** These results show associations, not causes. Genre may stand in for things the data does not hold, such as studio size, game length or how often a game is updated. The results describe established games at a single point in time.
-
-**Future work.** The model could add release year or test interactions such as genre × price. Repeating it on the May 2024 dataset would check whether the results replicate. 5-fold cross-validation would give a more stable estimate of prediction error.
+**Limitations.** These results show associations, not causes. Genre may stand in for things the data does not hold, such as studio size, game length or how often a game is updated. The results describe established games at a single point in time. **Future work.** The model could add release year or test interactions such as genre × price. Repeating it on the May 2024 dataset would check whether the results replicate. 5-fold cross-validation would give a more stable estimate of prediction error.
 
 ## 7. References {#sec-references}
 
@@ -337,10 +280,8 @@ Papke, L. E., & Wooldridge, J. M. (1996). Econometric methods for fractional res
 
 : Coefficients on the log-odds scale from the main model and the OLS robustness check. Both use robust standard errors {#tbl-robust}
 
-![Pearson residuals of the full model against fitted values (left) and their distribution (right)](images/residuals.pdf){#fig-resid fig-align="center" width="85%"}
+![Pearson residuals of the full model against fitted values and their distribution](images/phase2/residuals.svg){#fig-resid fig-align="center" width="85%"}
 
 ## 9. Appendix B (Github Repository) {#sec-appendix-b}
-
-All code for data cleaning, analysis and figures is in `notebooks/phase2-analysis.ipynb`:
 
 <https://github.com/rakeikahukoti-del/DATA301-individual-project.git>
