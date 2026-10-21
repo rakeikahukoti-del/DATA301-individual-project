@@ -1,6 +1,5 @@
 ---
 title: "DATA301 Individual Report"
-subtitle: "Genre and Positive Review Share on Steam, After Accounting for Price and Age Rating"
 author:
   - name: "Rakei Kahukoti: 300626332"
 date: "2026-10-25"
@@ -15,10 +14,11 @@ header-includes: |
   \AtBeginDocument{\captionsetup{labelfont=bf, format=plain, justification=centering}}
 ---
 
+Phase 1 group members: Joanna Calizo (300666927) and Derick Uriel (300663866)
+
 ## Content Overview
 
 \hypersetup{linkcolor=black}
-
 
 | **Section** | **Page** |
 |:---|:--:|
@@ -44,23 +44,17 @@ header-includes: |
 | \hyperref[sec-references]{7. \textbf{References}} | \pageref{sec-references} |
 | \hyperref[sec-appendix-b]{9. \textbf{Appendix B (Github Repository)}} | \pageref{sec-appendix-b} |
 
-
 \hypersetup{linkcolor=blue}
 
 \newpage
 
 ## Executive Summary {#sec-exec}
 
-
-
 \newpage
 
 ## 1. Background {#sec-background}
 
-
 **Aim.** This report answers one question. What is the relationship between a game's genre and its proportion of positive reviews, after accounting for price and age rating?
-
-
 
 \newpage
 
@@ -72,14 +66,9 @@ header-includes: |
 
 ### **2c. Data Cleaning and Completeness** {#sec-data-quality}
 
-
-
 \newpage
 
 ## 3. Ethics, Privacy and Security {#sec-ethics}
-
-
-
 
 \newpage
 
@@ -103,8 +92,6 @@ header-includes: |
 
 ![Share of games with an age restriction, by genre](images/figure6.svg){#fig-age fig-align="center" width="50%"}
 
-
-
 \newpage
 
 ## 5. Detailed Analysis {#sec-analysis}
@@ -119,13 +106,9 @@ header-includes: |
 
 #### **5e. Possible Biases** {#sec-bias}
 
-
-
 \newpage
 
 ## 6. Conclusions and Recommendations {#sec-conclusions}
-
-
 
 \newpage
 
@@ -133,19 +116,19 @@ header-includes: |
 
 Ermilov, A. (2025). Steam games dataset.
 
--   Kaggle. <https://www.kaggle.com/datasets/artermiloff/steam-games-dataset>
+- Kaggle. <https://www.kaggle.com/datasets/artermiloff/steam-games-dataset>
 
 Kafadar, K. (2026). Boxplots: Definition, history, extensions, and examples.
 
--   WIREs Computational Statistics, 18(3). <https://doi.org/10.1002/wics.70073>
+- WIREs Computational Statistics, 18(3). <https://doi.org/10.1002/wics.70073>
 
 McGill, R., Tukey, J. W., & Larsen, W. A. (1978). Variations of box plots.
 
--   The American Statistician, 32(1), 12–16. <https://doi.org/10.2307/2683468>
+- The American Statistician, 32(1), 12–16. <https://doi.org/10.2307/2683468>
 
 Papke, L. E., & Wooldridge, J. M. (1996). Econometric methods for fractional response variables with an application to 401(k) plan participation rates.
 
--   Journal of Applied Econometrics, 11(6), 619–632.
+- Journal of Applied Econometrics, 11(6), 619–632.
 
 \newpage
 
